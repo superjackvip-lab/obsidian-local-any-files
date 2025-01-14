@@ -26,19 +26,14 @@ If your plugin does not need CSS, delete this file.
 .logs-container {
 	max-height: 200px;
 	overflow-y: auto;
-	border: 1px solid var(--background-modifier-border);
-	padding: 10px;
-	margin-top: 20px;
+	padding: 2px;
 	font-family: monospace;
 }
 
-.logs-container div {
-	margin: 5px 0;
-}
 
 /* Modal Styles */
 .modal-header {
-    padding: 16px 20px;
+    padding: 16px 10px;
     border-bottom: 1px solid var(--background-modifier-border);
 }
 
