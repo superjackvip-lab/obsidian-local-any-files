@@ -37,12 +37,6 @@ If your plugin does not need CSS, delete this file.
     border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.modal-content {
-    padding: 10px;
-    overflow-y: auto;
-    max-height: 1000px;
-}
-
 /* Category Styles */
 .setting-category {
     color: var(--text-normal);
