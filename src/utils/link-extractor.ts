@@ -3,6 +3,7 @@
 import { requestUrl, RequestUrlResponse } from 'obsidian';
 import LocalAttachmentsPlugin from '../main';
 
+
 // Simple hash function that works in any JavaScript environment
 export function simpleHash(str: string): string {
     let hash = 0;
