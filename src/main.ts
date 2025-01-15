@@ -5,7 +5,9 @@ import { ProcessModal } from "./process-modal";
 import { SettingsBuilder } from './settings-builder';
 import { LocalAttachmentsSettingTab } from "./settings-tab";
 import { SingleItemModal } from './single-item-modal';
-import { FileDownloader, LinkExtractor, LinkReplacer, simpleHash } from "./utils/link-extractor";
+import { LinkExtractor, simpleHash } from "./utils/link-extractor";
+import { LinkReplacer } from "./utils/link-replacer";
+import { FileDownloader } from './utils/file-downloader';
 
 export default class LocalAttachmentsPlugin extends Plugin {
     settings: LocalAttachmentsSettings;
