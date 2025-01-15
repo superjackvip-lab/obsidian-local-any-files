@@ -67,6 +67,15 @@ export class FileDownloader {
 			'audio/mpeg': '.mp3',
 			'audio/wav': '.wav',
 			'audio/webm': '.weba',
+			'application/json': '.json',
+			'text/json': '.json',
+			'text/plain': '.txt',
+			'text/html': '.html',
+			'text/css': '.css',
+			'text/javascript': '.js',
+			'application/javascript': '.js',
+			'application/xml': '.xml',
+			'text/xml': '.xml'
 		};
 
 		// Get the base MIME type without parameters
@@ -109,7 +118,14 @@ export class FileDownloader {
 
 	async downloadFile(url: string, fileName: string, isMarkdownImage = false): Promise<DownloadResult> {
 		try {
-			const response = await requestUrl({ url });
+			const response = await requestUrl({
+				url,
+				headers: {
+					'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+				},
+				throw: false,
+				method: 'GET'
+			});
 
 			if (response.status !== 200) {
 				return {
@@ -121,8 +137,8 @@ export class FileDownloader {
 
 			let extension = this.getExtension(fileName);
 			
-			// Only use content-type for markdown images without a clear extension
-			if (isMarkdownImage && (!extension || extension === '.unknown')) {
+			// If no extension found or it's unknown, try to get it from content-type
+			if (!extension || extension === '.unknown') {
 				const contentType = response.headers['content-type'];
 				if (contentType) {
 					extension = this.getExtensionFromContentType(contentType);
@@ -162,18 +178,32 @@ export class FileDownloader {
 			throw new Error('App vault adapter not found');
 		}
 
-		// Convert array buffer to binary string if needed
-		let data: ArrayBuffer;
+		// Use arrayBuffer directly if available
 		if (response.arrayBuffer) {
-			data = response.arrayBuffer;
-		} else if (response.text) {
-			// Convert text to ArrayBuffer if that's what we got
-			const encoder = new TextEncoder();
-			data = encoder.encode(response.text).buffer;
-		} else {
-			throw new Error('No valid data found in response');
+			await this.plugin.app.vault.adapter.writeBinary(path, response.arrayBuffer);
+			return;
 		}
 
-		await this.plugin.app.vault.adapter.writeBinary(path, data);
+		// If we have binary data in text format, convert it
+		if (response.text && response.headers['content-type']?.includes('application/octet-stream')) {
+			const byteCharacters = atob(response.text);
+			const byteNumbers = new Array(byteCharacters.length);
+			for (let i = 0; i < byteCharacters.length; i++) {
+				byteNumbers[i] = byteCharacters.charCodeAt(i);
+			}
+			const byteArray = new Uint8Array(byteNumbers);
+			await this.plugin.app.vault.adapter.writeBinary(path, byteArray.buffer);
+			return;
+		}
+
+		// Last resort: convert text to ArrayBuffer
+		if (response.text) {
+			const encoder = new TextEncoder();
+			const data = encoder.encode(response.text).buffer;
+			await this.plugin.app.vault.adapter.writeBinary(path, data);
+			return;
+		}
+
+		throw new Error('No valid data found in response');
 	}
 }

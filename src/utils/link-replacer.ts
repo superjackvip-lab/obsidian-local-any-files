@@ -1,4 +1,3 @@
-
 export class LinkReplacer {
 	replaceInText(text: string, replacements: Map<string, string>): string {
 		let newText = text;
