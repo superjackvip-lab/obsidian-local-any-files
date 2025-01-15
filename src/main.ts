@@ -205,6 +205,7 @@ export default class LocalAttachmentsPlugin extends Plugin {
                         const downloadResults = new Map<string, string>();
                         for (const link of links) {
                             const downloader = new FileDownloader(
+                                this,
                                 this.settings.storePath,
                                 {
                                     path: document.path,
@@ -295,6 +296,7 @@ export default class LocalAttachmentsPlugin extends Plugin {
         const modal = new ProcessModal(this.app, this, async () => {
             modal.startDocumentLog(documentPath);
             const downloader = new FileDownloader(
+                this,
                 this.settings.storePath,
                 {
                     path: documentPath,
