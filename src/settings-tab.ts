@@ -1,7 +1,6 @@
-import { App, PluginSettingTab } from 'obsidian';
+import { App, PluginSettingTab, Setting } from 'obsidian';
 import LocalAttachmentsPlugin from './main';
 import { SettingsBuilder } from "./settings-builder";
-import { UIHelper } from "./utils/ui-helper";
 
 export class LocalAttachmentsSettingTab extends PluginSettingTab {
     plugin: LocalAttachmentsPlugin;
@@ -19,18 +18,18 @@ export class LocalAttachmentsSettingTab extends PluginSettingTab {
         const builder = new SettingsBuilder(containerEl, this.plugin);
 
         // Processing
-        UIHelper.createCategoryHeader(containerEl, 'Processing');
+        new Setting(containerEl).setName('Processing').setHeading();
         builder.addScopeDropdown();
         builder.addTasksDropdown();
 
         // File Extensions
-        UIHelper.createCategoryHeader(containerEl, 'File extensions');
+        new Setting(containerEl).setName('File extensions').setHeading();
         builder.addPresetExtensions();
         builder.addCustomExtensions();
         builder.addFinalExtensionsDisplay();
 
         // Storage
-        UIHelper.createCategoryHeader(containerEl, 'Storage');
+        new Setting(containerEl).setName('Storage').setHeading();
         builder.addStorePath();
     }
 }

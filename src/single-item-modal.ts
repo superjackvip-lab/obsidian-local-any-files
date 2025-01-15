@@ -1,7 +1,6 @@
-import { App, Modal, Notice } from 'obsidian';
+import { App, Modal, Notice, Setting } from 'obsidian';
 import LocalAttachmentsPlugin from "./main";
 import { SettingsBuilder } from "./settings-builder";
-import { UIHelper } from "./utils/ui-helper";
 
 export class SingleItemModal extends Modal {
     private settingsBuilder: SettingsBuilder;
@@ -22,12 +21,12 @@ export class SingleItemModal extends Modal {
         contentEl.empty();
 
         // Processing Options
-        UIHelper.createCategoryHeader(contentEl, 'Processing');
+        new Setting(contentEl).setName('Processing').setHeading();
         this.settingsBuilder.addScopeDropdown();
         this.settingsBuilder.addTasksDropdown();
 
         // Target Link
-        UIHelper.createCategoryHeader(contentEl, 'Target Link');
+        new Setting(contentEl).setName('Target Link').setHeading();
         const targetLinkContainer = contentEl.createEl('div', {
             cls: 'setting-item'
         });
@@ -38,7 +37,7 @@ export class SingleItemModal extends Modal {
         });
 
         // Storage Options
-        UIHelper.createCategoryHeader(contentEl, 'Storage');
+        new Setting(contentEl).setName('Storage').setHeading();
         this.settingsBuilder.addStorePath();
 
         // Add submit button

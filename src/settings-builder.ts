@@ -15,17 +15,17 @@ export class SettingsBuilder {
 		containerEl.empty();
 
 		// Processing
-		containerEl.createEl('h3', {text: 'Processing', cls: 'setting-category'});
+		new Setting(containerEl).setName('Processing').setHeading();
 		this.addScopeDropdown();
 		this.addTasksDropdown();
 
 		// File extensions
-		containerEl.createEl('h3', {text: 'File extensions', cls: 'setting-category'});
+		new Setting(containerEl).setName('File extensions').setHeading();
 		this.addPresetExtensions();
 		this.addCustomExtensions();
 
 		// Storage
-		containerEl.createEl('h3', {text: 'Storage', cls: 'setting-category storage-category'});
+		new Setting(containerEl).setName('Storage').setHeading();
 		this.addStorePath();
 
 		// Add category styling

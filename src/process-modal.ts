@@ -1,6 +1,5 @@
 import { App, Modal } from 'obsidian';
 import LocalAttachmentsPlugin from './main';
-import { UIHelper } from './utils/ui-helper';
 
 export class ProcessModal extends Modal {
     private progressBar: HTMLDivElement;
