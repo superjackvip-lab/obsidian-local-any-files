@@ -60,6 +60,7 @@ It supports a wide range of file types and provides flexible configuration optio
     - `${date}`: Current date
     - `${time}`: Current time
     - `${md5}`: Random string
+    - `${extension}`: File extension
 
 ## Comparison with `obsidian-local-images`
 

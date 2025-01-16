@@ -60,6 +60,7 @@
     - `${date}`：当前日期
     - `${time}`：当前时间
     - `${md5}`：随机字符串
+    - `${extension}`：文件扩展名
 
 ## 与 `obsidian-local-images` 的比较
 

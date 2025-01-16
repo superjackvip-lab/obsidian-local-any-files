@@ -215,7 +215,8 @@ export default class LocalAttachmentsPlugin extends Plugin {
                                     date: new Date().toISOString().split('T')[0],
                                     time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
                                     originalName: link.fileName,
-                                    md5: simpleHash(link.fileName)
+                                    md5: simpleHash(link.fileName),
+                                    extension: link.fileName.split('.').pop() || '',
                                 },
                                 this.settings.storeFileName
                             );
@@ -306,7 +307,8 @@ export default class LocalAttachmentsPlugin extends Plugin {
                     date: new Date().toISOString().split('T')[0],
                     time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
                     originalName: documentPath.split('/').pop() || 'untitled',
-                    md5: simpleHash(documentPath.split('/').pop() || 'untitled')
+                    md5: simpleHash(documentPath.split('/').pop() || 'untitled'),
+                    extension: documentPath.split('.').pop() || '',
                 },
                 this.settings.storeFileName
             );

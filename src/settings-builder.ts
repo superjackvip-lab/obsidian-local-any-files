@@ -280,7 +280,7 @@ export class SettingsBuilder {
 	addStorePath(): void {
 		new Setting(this.containerEl)
 			.setName('Store path')
-			.setDesc('Set the path pattern for downloaded files. Available variables: ${date}, ${time}, ${path}, ${notename}')
+			.setDesc('Set the path pattern for downloaded files. Available variables: ${date}, ${time}, ${path}, ${notename}, ${extension}')
 			.addText(text => {
 				text.setValue(this.plugin.settings.storePath)
 					.onChange(async (value) => {
@@ -291,7 +291,7 @@ export class SettingsBuilder {
 
 		new Setting(this.containerEl)
 			.setName('Store file name')
-			.setDesc('Set the file name pattern for downloaded files. Available variables: ${originalName}, ${md5}, ${notename}, ${date}, ${time}')
+			.setDesc('Set the file name pattern for downloaded files. Available variables: ${originalName}, ${md5}, ${notename}, ${date}, ${time}, ${extension}')
 			.addText(text => {
 				text.setValue(this.plugin.settings.storeFileName)
 					.onChange(async (value) => {
