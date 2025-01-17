@@ -114,7 +114,7 @@ export class FileDownloader {
 		const fileVariables = {
 			...this.variables,
 			originalName: cleanFileName,
-			md5: simpleHash(originalUrl)
+			random: simpleHash(originalUrl)
 		};
 
 		Object.entries(fileVariables).forEach(([key, value]) => {

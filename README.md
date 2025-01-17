@@ -59,7 +59,7 @@ It supports a wide range of file types and provides flexible configuration optio
     - `${originalName}`: Original file name
     - `${date}`: Current date
     - `${time}`: Current time
-    - `${md5}`: Random string
+    - `${random}`: Random string
     - `${extension}`: File extension
 
 ## Comparison with `obsidian-local-images`

@@ -291,7 +291,7 @@ export class SettingsBuilder {
 
 		new Setting(this.containerEl)
 			.setName('Store file name')
-			.setDesc('Set the file name pattern for downloaded files. Available variables: ${originalName}, ${md5}, ${notename}, ${date}, ${time}, ${extension}')
+			.setDesc('Set the file name pattern for downloaded files. Available variables: ${originalName}, ${random}, ${notename}, ${date}, ${time}, ${extension}')
 			.addText(text => {
 				text.setValue(this.plugin.settings.storeFileName)
 					.onChange(async (value) => {
