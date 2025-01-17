@@ -61,6 +61,12 @@
     - `${time}`：当前时间
     - `${random}`：随机字符串
     - `${extension}`：文件扩展名
+    - `${year}`：当前年
+    - `${month}`：当前月
+    - `${day}`：当前日
+    - `${hour}`：当前小时
+    - `${minute}`：当前分钟
+    - `${second}`：当前秒
 
 ## 与 `obsidian-local-images` 的比较
 

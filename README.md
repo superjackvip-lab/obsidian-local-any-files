@@ -61,6 +61,12 @@ It supports a wide range of file types and provides flexible configuration optio
     - `${time}`: Current time
     - `${random}`: Random string
     - `${extension}`: File extension
+    - `${year}`: Current year
+    - `${month}`: Current month
+    - `${day}`: Current day
+    - `${hour}`: Current hour
+    - `${minute}`: Current minute
+    - `${second}`: Current second
 
 ## Comparison with `obsidian-local-images`
 

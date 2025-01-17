@@ -215,7 +215,13 @@ export default class LocalAttachmentsPlugin extends Plugin {
                                     date: new Date().toISOString().split('T')[0],
                                     time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
                                     originalName: link.fileName,
-                                    random: simpleHash(link.fileName)
+                                    random: simpleHash(link.fileName),
+                                    year: new Date().getFullYear().toString(),
+                                    month: (new Date().getMonth() + 1).toString().padStart(2, '0'),
+                                    day: new Date().getDate().toString().padStart(2, '0'),
+                                    hour: new Date().getHours().toString().padStart(2, '0'),
+                                    minute: new Date().getMinutes().toString().padStart(2, '0'),
+                                    second: new Date().getSeconds().toString().padStart(2, '0'),
                                 },
                                 this.settings.storeFileName
                             );
@@ -306,7 +312,13 @@ export default class LocalAttachmentsPlugin extends Plugin {
                     date: new Date().toISOString().split('T')[0],
                     time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
                     originalName: documentPath.split('/').pop() || 'untitled',
-                    random: simpleHash(documentPath.split('/').pop() || 'untitled')
+                    random: simpleHash(documentPath.split('/').pop() || 'untitled'),
+                    year: new Date().getFullYear().toString(),
+                    month: (new Date().getMonth() + 1).toString().padStart(2, '0'),
+                    day: new Date().getDate().toString().padStart(2, '0'),
+                    hour: new Date().getHours().toString().padStart(2, '0'),
+                    minute: new Date().getMinutes().toString().padStart(2, '0'),
+                    second: new Date().getSeconds().toString().padStart(2, '0'),
                 },
                 this.settings.storeFileName
             );
