@@ -6,8 +6,9 @@ import { SettingsBuilder } from './settings-builder';
 import { LocalAttachmentsSettingTab } from "./settings-tab";
 import { SingleItemModal } from './single-item-modal';
 import { FileDownloader } from './utils/file-downloader';
-import { LinkExtractor, simpleHash } from "./utils/link-extractor";
+import { LinkExtractor } from "./utils/link-extractor";
 import { LinkReplacer } from "./utils/link-replacer";
+import { generatePathVariables } from './utils/variables-helper';
 
 export default class LocalAttachmentsPlugin extends Plugin {
     settings: LocalAttachmentsSettings;
@@ -209,20 +210,7 @@ export default class LocalAttachmentsPlugin extends Plugin {
                             const downloader = new FileDownloader(
                                 this,
                                 this.settings.storePath,
-                                {
-                                    path: document.path,
-                                    notename: document.basename,
-                                    date: new Date().toISOString().split('T')[0],
-                                    time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
-                                    originalName: link.fileName,
-                                    random: simpleHash(link.fileName),
-                                    year: new Date().getFullYear().toString(),
-                                    month: (new Date().getMonth() + 1).toString().padStart(2, '0'),
-                                    day: new Date().getDate().toString().padStart(2, '0'),
-                                    hour: new Date().getHours().toString().padStart(2, '0'),
-                                    minute: new Date().getMinutes().toString().padStart(2, '0'),
-                                    second: new Date().getSeconds().toString().padStart(2, '0'),
-                                },
+                                generatePathVariables(document.path),
                                 this.settings.storeFileName
                             );
 
@@ -306,20 +294,7 @@ export default class LocalAttachmentsPlugin extends Plugin {
             const downloader = new FileDownloader(
                 this,
                 this.settings.storePath,
-                {
-                    path: documentPath,
-                    notename: documentPath.split('/').pop() || 'untitled',
-                    date: new Date().toISOString().split('T')[0],
-                    time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
-                    originalName: documentPath.split('/').pop() || 'untitled',
-                    random: simpleHash(documentPath.split('/').pop() || 'untitled'),
-                    year: new Date().getFullYear().toString(),
-                    month: (new Date().getMonth() + 1).toString().padStart(2, '0'),
-                    day: new Date().getDate().toString().padStart(2, '0'),
-                    hour: new Date().getHours().toString().padStart(2, '0'),
-                    minute: new Date().getMinutes().toString().padStart(2, '0'),
-                    second: new Date().getSeconds().toString().padStart(2, '0'),
-                },
+                generatePathVariables(documentPath),
                 this.settings.storeFileName
             );
 
