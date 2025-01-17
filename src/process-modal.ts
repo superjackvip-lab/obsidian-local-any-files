@@ -30,7 +30,7 @@ export class ProcessModal extends Modal {
         super(app);
         this.plugin = plugin;
         this.processCallback = processCallback;
-        this.titleEl.setText('Local anything > Processing')
+        this.titleEl.setText('Local any files > Processing')
     }
 
     onOpen() {

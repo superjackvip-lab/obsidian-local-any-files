@@ -14,7 +14,7 @@ export class OptionsModal extends Modal {
     ) {
         super(app);
         this.settingsBuilder = new SettingsBuilder(this.contentEl, this.plugin, this.defaultScope);
-        this.titleEl.setText('Local anything > Options');
+        this.titleEl.setText('Local any files > Options');
     }
 
     onOpen() {
