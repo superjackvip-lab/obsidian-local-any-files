@@ -1,5 +1,5 @@
 import { App, Modal } from 'obsidian';
-import LocalAttachmentsPlugin from './main';
+import LocalAnyFilesPlugin from './main';
 
 export class ProcessModal extends Modal {
     private progressBar: HTMLDivElement;
@@ -11,7 +11,7 @@ export class ProcessModal extends Modal {
     private progress = 0;
     private logs: string[] = [];
     private processCallback: () => Promise<void>;
-    private plugin: LocalAttachmentsPlugin;
+    private plugin: LocalAnyFilesPlugin;
     private currentTask: Task | null = null;
     private taskDisplayNames: Record<Task, string> = {
         extract: 'Extract links',
@@ -26,7 +26,7 @@ export class ProcessModal extends Modal {
         failedFiles: 0
     };
 
-    constructor(app: App, plugin: LocalAttachmentsPlugin, processCallback: () => Promise<void>) {
+    constructor(app: App, plugin: LocalAnyFilesPlugin, processCallback: () => Promise<void>) {
         super(app);
         this.plugin = plugin;
         this.processCallback = processCallback;

@@ -1,5 +1,5 @@
 import { App, Modal, Notice, Setting } from 'obsidian';
-import LocalAttachmentsPlugin from "./main";
+import LocalAnyFilesPlugin from "./main";
 import { SettingsBuilder } from "./settings-builder";
 
 export class SingleItemModal extends Modal {
@@ -7,7 +7,7 @@ export class SingleItemModal extends Modal {
 
     constructor(
         app: App,
-        private plugin: LocalAttachmentsPlugin,
+        private plugin: LocalAnyFilesPlugin,
         private documentPath: string,
         private onSubmit: () => void
     ) {

@@ -1,11 +1,11 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
-import LocalAttachmentsPlugin from './main';
+import LocalAnyFilesPlugin from './main';
 import { SettingsBuilder } from "./settings-builder";
 
-export class LocalAttachmentsSettingTab extends PluginSettingTab {
-    plugin: LocalAttachmentsPlugin;
+export class LocalAnyFilesSettingTab extends PluginSettingTab {
+    plugin: LocalAnyFilesPlugin;
 
-    constructor(app: App, plugin: LocalAttachmentsPlugin) {
+    constructor(app: App, plugin: LocalAnyFilesPlugin) {
         super(app, plugin);
         this.plugin = plugin;
     }

@@ -1,5 +1,5 @@
 import { requestUrl, RequestUrlResponse } from "obsidian";
-import LocalAttachmentsPlugin from "src/main";
+import LocalAnyFilesPlugin from "src/main";
 import { simpleHash } from "./link-extractor";
 
 export interface DownloadResult {
@@ -12,9 +12,9 @@ export class FileDownloader {
 	private storePath: string;
 	private variables: Record<string, string>;
 	private storeFileName: string;
-	private plugin: LocalAttachmentsPlugin;
+	private plugin: LocalAnyFilesPlugin;
 
-	constructor(plugin: LocalAttachmentsPlugin, storePath: string, variables: Record<string, string>, storeFileName: string) {
+	constructor(plugin: LocalAnyFilesPlugin, storePath: string, variables: Record<string, string>, storeFileName: string) {
 		this.plugin = plugin;
 		this.storePath = storePath;
 		this.variables = variables;

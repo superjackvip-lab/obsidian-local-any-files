@@ -6,7 +6,7 @@ export interface ValidationResult {
 }
 
 export class SettingsValidator {
-    static validateSettings(settings: LocalAttachmentsSettings): ValidationResult {
+    static validateSettings(settings: LocalAnyFilesSettings): ValidationResult {
         const errors: string[] = [];
 
         // Validate tasks
@@ -37,7 +37,7 @@ export class SettingsValidator {
         };
     }
 
-    private static getAllExtensions(settings: LocalAttachmentsSettings): string[] {
+    private static getAllExtensions(settings: LocalAnyFilesSettings): string[] {
         // Get actual extensions from presets
         const presetExtensions = (settings.presetExtensions || [])
             .flatMap(presetKey => EXTENSION_PRESETS[presetKey] || []);

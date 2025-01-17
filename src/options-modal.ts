@@ -1,5 +1,5 @@
 import { App, Modal, Notice, Setting } from 'obsidian';
-import LocalAttachmentsPlugin from "./main";
+import LocalAnyFilesPlugin from "./main";
 import { SettingsBuilder } from "./settings-builder";
 import { SettingsValidator } from "./utils/settings-validator";
 
@@ -8,7 +8,7 @@ export class OptionsModal extends Modal {
 
     constructor(
         app: App,
-        private plugin: LocalAttachmentsPlugin,
+        private plugin: LocalAnyFilesPlugin,
         private onSubmit: () => void,
         private defaultScope?: 'currentFile' | 'currentFolder' | 'allFiles'
     ) {

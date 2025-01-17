@@ -1,11 +1,11 @@
 import { Notice, Setting } from 'obsidian';
 import { EXTENSION_PRESETS } from "./config";
-import LocalAttachmentsPlugin from "./main";
+import LocalAnyFilesPlugin from "./main";
 
 export class SettingsBuilder {
 	constructor(
 		private containerEl: HTMLElement,
-		private plugin: LocalAttachmentsPlugin,
+		private plugin: LocalAnyFilesPlugin,
 		private defaultScope?: 'currentFile' | 'currentFolder' | 'allFiles' | 'singleItem'
 	) {
 	}
@@ -570,7 +570,7 @@ export class SettingsBuilder {
 		};
 	}
 
-	private getFinalExtensions(): string[] {
+	private getFinalProcessingExtensions(): string[] {
 		// Get all extensions from selected presets (already lowercase from config)
 		const presetExtensions = this.plugin.settings.presetExtensions
 			.flatMap(presetKey => EXTENSION_PRESETS[presetKey] || []);

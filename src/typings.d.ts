@@ -2,7 +2,7 @@ type ScopeType = 'singleItem' | 'currentFile' | 'currentFolder' | 'allFiles';
 type PresetExtensionType = keyof typeof import('./config').EXTENSION_PRESETS;
 type Task = 'extract' | 'download' | 'replace';
 
-interface LocalAttachmentsSettings {
+interface LocalAnyFilesSettings {
 	tasks: (Task)[];
 	scope: ScopeType;
 	presetExtensions: PresetExtensionType[];
