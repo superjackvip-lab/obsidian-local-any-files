@@ -27,32 +27,7 @@ export class SettingsBuilder {
 		// Storage
 		new Setting(containerEl).setName('Storage').setHeading();
 		this.addStorePath();
-
-		// Add category styling
-		const style = document.createElement('style');
-		style.textContent = `
-
-            .setting-item {
-                border: none !important;
-            }
-
-            .setting-item .setting-item-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
-            }
-
-            .setting-item .setting-item-name {
-                margin-bottom: 0;
-                font-weight: 600;
-            }
-
-            .setting-item .setting-item-description {
-                margin-top: 0;
-                color: var(--text-muted);
-            }
-        `;
-		document.head.appendChild(style);
+		
 	}
 
 	addScopeDropdown(): void {
@@ -172,36 +147,6 @@ export class SettingsBuilder {
 						});
 				});
 		});
-
-		// Add some styling
-		const style = document.createElement('style');
-		style.textContent = `
-            .tasks-setting {
-                margin-bottom: 0;
-            }
-
-            .tasks-container {
-                margin-top: 6px;
-                margin-left: 36px;
-                border-left: 2px solid var(--background-modifier-border);
-                padding-left: 8px;
-            }
-
-            .task-item {
-                border: none;
-                padding: 4px 0;
-                margin: 0;
-            }
-
-            .task-item .setting-item-info {
-                padding: 0;
-            }
-
-            .task-item .setting-item-control {
-                padding: 0;
-            }
-        `;
-		document.head.appendChild(style);
 	}
 
 	addPresetExtensions(): void {
@@ -246,35 +191,6 @@ export class SettingsBuilder {
 				});
 		});
 
-		// Add styling - reuse the same pattern as tasks
-		const style = document.createElement('style');
-		style.textContent = `
-            .presets-setting {
-                margin-bottom: 0;
-            }
-
-            .presets-container {
-                margin-top: 6px;
-                margin-left: 36px;
-                border-left: 2px solid var(--background-modifier-border);
-                padding-left: 8px;
-            }
-
-            .preset-item {
-                border: none;
-                padding: 4px 0;
-                margin: 0;
-            }
-
-            .preset-item .setting-item-info {
-                padding: 0;
-            }
-
-            .preset-item .setting-item-control {
-                padding: 0;
-            }
-        `;
-		document.head.appendChild(style);
 	}
 
 	addStorePath(): void {
@@ -378,85 +294,6 @@ export class SettingsBuilder {
 				addExtension();
 			}
 		});
-
-		// Add styling
-		const style = document.createElement('style');
-		style.textContent = `
-            .vertical-layout {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                width: 100%;
-            }
-
-            .custom-extensions-setting {
-                margin-bottom: 0;
-            }
-
-            .custom-extensions-container {
-                margin-top: 6px;
-                margin-left: 36px;
-                padding-left: 8px;
-            }
-
-            .custom-input-container {
-                display: flex;
-                gap: 8px;
-                width: 100%;
-                align-items: center;
-            }
-
-            .custom-input-container input {
-                flex-grow: 1;
-                background: var(--background-secondary);
-                border: 1px solid var(--background-modifier-border);
-                padding: 4px 8px;
-                border-radius: 4px;
-                height: 28px;
-            }
-
-            .custom-input-container button {
-                height: 28px;
-                padding: 4px;
-                display: flex;
-                align-items: center;
-            }
-
-            .custom-extensions-tags {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 6px;
-                min-height: 32px;
-                padding: 8px;
-                background: var(--background-secondary);
-                border-radius: 4px;
-                width: 100%;
-            }
-
-            .custom-extension-tag {
-                padding-right: 4px;
-            }
-
-            .extension-tag-remove {
-                margin-left: 4px;
-                cursor: pointer;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                background-color: rgba(var(--background-modifier-error-rgb), 0.2);
-                color: var(--text-on-accent);
-                font-size: 14px;
-                line-height: 1;
-            }
-
-            .extension-tag-remove:hover {
-                background-color: rgba(var(--background-modifier-error-rgb), 0.4);
-            }
-        `;
-		document.head.appendChild(style);
 	}
 
 	addFinalExtensionsDisplay(): void {
@@ -506,49 +343,6 @@ export class SettingsBuilder {
 		if (existingStyle) {
 			existingStyle.remove();
 		}
-
-		const style = document.createElement('style');
-		style.setAttribute('data-extensions-preview', '');
-		style.textContent = `
-            .extensions-preview-setting {
-                margin-bottom: 0;
-            }
-
-            .extensions-preview-container {
-                margin-top: 6px;
-                margin-left: 36px;
-                padding-left: 8px;
-            }
-
-            .extensions-box {
-                background-color: var(--background-secondary);
-                border-radius: 4px;
-                padding: 8px;
-                min-height: 32px;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 6px;
-                align-items: center;
-                width: 100%;
-            }
-
-            .extension-empty-text {
-                color: var(--text-muted);
-                font-style: italic;
-                padding: 4px;
-            }
-
-            .extension-tag {
-                padding: 2px 8px;
-                border-radius: 12px;
-                font-size: 12px;
-                line-height: 16px;
-                font-weight: 500;
-                display: inline-flex;
-                align-items: center;
-            }
-        `;
-		document.head.appendChild(style);
 	}
 
 	static validateSettings(settings: any): { isValid: boolean; errors: string[] } {

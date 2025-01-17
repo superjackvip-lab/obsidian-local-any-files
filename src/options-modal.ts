@@ -39,7 +39,7 @@ export class OptionsModal extends Modal {
         // Add submit button
         const submitButton = contentEl.createEl('button', {
             text: 'Start processing',
-            cls: 'mod-cta'
+            cls: 'mod-cta full-width-button'
         });
         submitButton.addEventListener('click', () => {
             this.handleSubmit();
