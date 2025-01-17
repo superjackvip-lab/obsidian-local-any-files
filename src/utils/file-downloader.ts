@@ -53,7 +53,7 @@ export class FileDownloader {
 
 	private getExtensionFromContentType(contentType: string): string {
 		const mimeToExt: { [key: string]: string } = {
-			'image/jpeg': '.jpg',
+			'image/jpeg': '.jpeg',
 			'image/jpg': '.jpg',
 			'image/png': '.png',
 			'image/gif': '.gif',
@@ -61,6 +61,8 @@ export class FileDownloader {
 			'image/svg+xml': '.svg',
 			'image/bmp': '.bmp',
 			'image/tiff': '.tiff',
+			'image/vnd.adobe.photoshop': '.psd',
+			'image/vnd.microsoft.icon': '.ico',
 			'application/pdf': '.pdf',
 			'video/mp4': '.mp4',
 			'video/webm': '.webm',
@@ -75,7 +77,19 @@ export class FileDownloader {
 			'text/javascript': '.js',
 			'application/javascript': '.js',
 			'application/xml': '.xml',
-			'text/xml': '.xml'
+			'text/xml': '.xml',
+			'application/zip': '.zip',
+			'application/x-rar-compressed': '.rar',
+			'application/x-7z-compressed': '.7z',
+			'application/x-tar': '.tar',
+			'application/x-gzip': '.gz',
+			'application/x-bzip2': '.bz2',
+			'application/x-xz': '.xz',
+			'application/x-iso9660-image': '.iso',
+			'application/x-gzip-compressed': '.tgz',
+			'application/x-compressed': '.z',
+			'application/x-bzip2-compressed': '.bzip2',
+			'application/x-cab-compressed': '.cab'
 		};
 
 		// Get the base MIME type without parameters
@@ -86,6 +100,9 @@ export class FileDownloader {
 	private async getLocalPath(originalUrl: string, fileName: string, extension: string): Promise<string> {
 		let path = this.storePath;
 		const cleanFileName = this.getCleanFileName(originalUrl);
+
+		// Set extension variable
+		this.variables.extension = extension.substring(1);
 
 		// Replace variables in path
 		Object.entries(this.variables).forEach(([key, value]) => {

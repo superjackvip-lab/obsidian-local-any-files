@@ -5,9 +5,9 @@ import { ProcessModal } from "./process-modal";
 import { SettingsBuilder } from './settings-builder';
 import { LocalAttachmentsSettingTab } from "./settings-tab";
 import { SingleItemModal } from './single-item-modal';
+import { FileDownloader } from './utils/file-downloader';
 import { LinkExtractor, simpleHash } from "./utils/link-extractor";
 import { LinkReplacer } from "./utils/link-replacer";
-import { FileDownloader } from './utils/file-downloader';
 
 export default class LocalAttachmentsPlugin extends Plugin {
     settings: LocalAttachmentsSettings;
@@ -215,8 +215,7 @@ export default class LocalAttachmentsPlugin extends Plugin {
                                     date: new Date().toISOString().split('T')[0],
                                     time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
                                     originalName: link.fileName,
-                                    md5: simpleHash(link.fileName),
-                                    extension: link.fileName.split('.').pop() || '',
+                                    md5: simpleHash(link.fileName)
                                 },
                                 this.settings.storeFileName
                             );
@@ -307,8 +306,7 @@ export default class LocalAttachmentsPlugin extends Plugin {
                     date: new Date().toISOString().split('T')[0],
                     time: new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
                     originalName: documentPath.split('/').pop() || 'untitled',
-                    md5: simpleHash(documentPath.split('/').pop() || 'untitled'),
-                    extension: documentPath.split('.').pop() || '',
+                    md5: simpleHash(documentPath.split('/').pop() || 'untitled')
                 },
                 this.settings.storeFileName
             );
