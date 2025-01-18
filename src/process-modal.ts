@@ -43,9 +43,9 @@ export class ProcessModal extends Modal {
         this.updateStats();
 
         // Progress section
-        const progressSection = contentEl.createDiv({cls: 'progress-section'});
-        this.progressBar = progressSection.createDiv({cls: 'progress-bar'});
-        this.progressFill = this.progressBar.createDiv({cls: 'progress-fill'});
+        const progressSection = contentEl.createDiv({cls: 'custom-progress-section'});
+        this.progressBar = progressSection.createDiv({cls: 'custom-progress-bar'});
+        this.progressFill = this.progressBar.createDiv({cls: 'custom-progress-fill'});
 
         // Logs section
         this.logsContainer = contentEl.createDiv({cls: 'logs-container'});
