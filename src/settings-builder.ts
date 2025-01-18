@@ -345,6 +345,10 @@ export class SettingsBuilder {
 		}
 	}
 
+	getStorageSectionHeaderDesc(): string {
+		return 'Available variables: ${originalName}, ${random}, ${notename}, ${date}, ${time}, ${extension}, ${year} , ${month}, ${day}, ${hour}, ${minute}, ${second}.'
+	}
+
 	static validateSettings(settings: any): { isValid: boolean; errors: string[] } {
 		const errors: string[] = [];
 

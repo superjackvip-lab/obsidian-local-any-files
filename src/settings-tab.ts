@@ -29,7 +29,7 @@ export class LocalAnyFilesSettingTab extends PluginSettingTab {
         builder.addFinalExtensionsDisplay();
 
         // Storage
-        new Setting(containerEl).setName('Storage').setHeading();
+        new Setting(containerEl).setName('Storage').setHeading().setDesc(builder.getStorageSectionHeaderDesc());
         builder.addStorePath();
     }
 }

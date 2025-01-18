@@ -33,7 +33,7 @@ export class OptionsModal extends Modal {
         this.settingsBuilder.addFinalExtensionsDisplay();
 
         // Storage
-        new Setting(contentEl).setName('Storage').setHeading().setDesc('Available variables: ${originalName}, ${random}, ${notename}, ${date}, ${time}, ${extension}, ${year} , ${month}, ${day}, ${hour}, ${minute}, ${second}.');
+        new Setting(contentEl).setName('Storage').setHeading().setDesc(this.settingsBuilder.getStorageSectionHeaderDesc());
         this.settingsBuilder.addStorePath();
 
         // Add submit button
