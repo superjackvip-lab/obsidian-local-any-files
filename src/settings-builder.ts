@@ -15,36 +15,36 @@ export class SettingsBuilder {
 		containerEl.empty();
 
 		// Processing
-		new Setting(containerEl).setName('Processing').setHeading();
+		new Setting(containerEl).setName('处理设置').setHeading();
 		this.addScopeDropdown();
 		this.addTasksDropdown();
 
 		// File extensions
-		new Setting(containerEl).setName('File extensions').setHeading();
+		new Setting(containerEl).setName('文件扩展名').setHeading();
 		this.addPresetExtensions();
 		this.addCustomExtensions();
 
 		// Storage
-		new Setting(containerEl).setName('Storage').setHeading();
+		new Setting(containerEl).setName('存储设置').setHeading();
 		this.addStorePath();
 		
 	}
 
 	addScopeDropdown(): void {
 		const options = {
-			currentFile: 'Current file only',
-			currentFolder: 'Current folder',
-			allFiles: 'All files in vault'
+			currentFile: '仅当前文件',
+			currentFolder: '当前文件夹',
+			allFiles: '库中所有文件'
 		};
 
 		// For single item modal, only show the single item option
 		if (this.defaultScope === 'singleItem') {
 			new Setting(this.containerEl)
-				.setName('Scope')
-				.setDesc('Download single item')
+				.setName('处理范围')
+				.setDesc('下载单个项目')
 				.addDropdown(dropdown => {
 					dropdown
-						.addOption('singleItem', 'Single item')
+						.addOption('singleItem', '单个项目')
 						.setValue('singleItem')
 						.onChange(async (value) => {
 							this.plugin.settings.scope = value as 'currentFile' | 'allFiles' | 'currentFolder' | 'singleItem';
@@ -56,8 +56,8 @@ export class SettingsBuilder {
 
 		// For regular options modal
 		new Setting(this.containerEl)
-			.setName('Scope')
-			.setDesc('Select which files to process')
+			.setName('处理范围')
+			.setDesc('选择要处理的文件')
 			.addDropdown(dropdown => {
 				Object.entries(options).forEach(([value, name]) => {
 					dropdown.addOption(value, name);
@@ -78,16 +78,16 @@ export class SettingsBuilder {
 
 	addTasksDropdown(): void {
 		const tasksSetting = new Setting(this.containerEl)
-			.setName('Tasks')
-			.setDesc('Select which tasks to perform')
+			.setName('任务')
+			.setDesc('选择要执行的任务')
 			.setClass('tasks-setting');
 
 		const tasksContainer = tasksSetting.settingEl.createDiv('tasks-container');
 
 		const tasks = {
-			extract: 'Extract links',
-			download: 'Download files',
-			replace: 'Replace links'
+			extract: '提取链接',
+			download: '下载文件',
+			replace: '替换链接'
 		};
 
 		const taskToggles: Record<string, any> = {};
@@ -125,19 +125,19 @@ export class SettingsBuilder {
 								}
 							} else {
 								// When disabling a task, check if it's required by other enabled tasks
-								if (key === 'extract' &&
-									(this.plugin.settings.tasks.includes('download') ||
-										this.plugin.settings.tasks.includes('replace'))) {
-									// Cannot disable extract if download or replace is enabled
-									toggle.setValue(true);
-									new Notice('Cannot disable Extract links while Download files or Replace links is enabled');
-									return;
-								} else if (key === 'download' &&
-									this.plugin.settings.tasks.includes('replace')) {
-									// Cannot disable download if replace is enabled
-									toggle.setValue(true);
-									new Notice('Cannot disable Download files while Replace links is enabled');
-									return;
+							if (key === 'extract' &&
+								(this.plugin.settings.tasks.includes('download') ||
+									this.plugin.settings.tasks.includes('replace'))) {
+								// Cannot disable extract if download or replace is enabled
+								toggle.setValue(true);
+								new Notice('启用"下载文件"或"替换链接"时，无法禁用"提取链接"');
+								return;
+							} else if (key === 'download' &&
+								this.plugin.settings.tasks.includes('replace')) {
+								// Cannot disable download if replace is enabled
+								toggle.setValue(true);
+								new Notice('启用"替换链接"时，无法禁用"下载文件"');
+								return;
 								} else {
 									this.plugin.settings.tasks = this.plugin.settings.tasks
 										.filter(task => task !== key);
@@ -151,24 +151,24 @@ export class SettingsBuilder {
 
 	addPresetExtensions(): void {
 		const presetSetting = new Setting(this.containerEl)
-			.setName('Preset extensions')
-			.setDesc('Select preset file types')
+			.setName('预设扩展名')
+			.setDesc('选择预设文件类型')
 			.setClass('presets-setting');
 
 		const presetsContainer = presetSetting.settingEl.createDiv('presets-container');
 
 		const presets = {
-			image: 'Image files',
-			officeFile: 'Office documents',
-			archivePackage: 'Archive files',
-			music: 'Music files',
-			video: 'Video files',
-			code: 'Code & development',
-			font: 'Font files',
-			design: '3D & design files',
-			database: 'Database files',
-			ebook: 'E-book formats',
-			academic: 'Research & academic'
+			image: '图片文件',
+			officeFile: '办公文档',
+			archivePackage: '压缩文件',
+			music: '音乐文件',
+			video: '视频文件',
+			code: '代码与开发',
+			font: '字体文件',
+			design: '3D 与设计文件',
+			database: '数据库文件',
+			ebook: '电子书格式',
+			academic: '学术与研究'
 		};
 
 		Object.entries(presets).forEach(([key, name]) => {
@@ -195,8 +195,8 @@ export class SettingsBuilder {
 
 	addStorePath(): void {
 		new Setting(this.containerEl)
-			.setName('Store path')
-			.setDesc('Set the path pattern for downloaded files.')
+			.setName('存储路径')
+			.setDesc('设置下载文件的路径模式')
 			.addText(text => {
 				text.setValue(this.plugin.settings.storePath)
 					.onChange(async (value) => {
@@ -206,8 +206,8 @@ export class SettingsBuilder {
 			});
 
 		new Setting(this.containerEl)
-			.setName('Store file name')
-			.setDesc('Set the file name pattern for downloaded files. The store name has no need to include the file extension')
+			.setName('存储文件名')
+			.setDesc('设置下载文件的文件名模式（无需包含文件扩展名）')
 			.addText(text => {
 				text.setValue(this.plugin.settings.storeFileName)
 					.onChange(async (value) => {
@@ -219,8 +219,8 @@ export class SettingsBuilder {
 
 	addCustomExtensions(): void {
 		const customSetting = new Setting(this.containerEl)
-			.setName('Custom extensions')
-			.setDesc('Add custom file extensions (format: .ext). Use | to add multiple extensions at once (e.g., .pdf|.txt|.md)')
+			.setName('自定义扩展名')
+			.setDesc('添加自定义文件扩展名（格式：.ext）。使用 | 一次添加多个扩展名（例如：.pdf|.txt|.md）')
 			.setClass('custom-extensions-setting');
 
 		const customContainer = customSetting.settingEl.createDiv('custom-extensions-container');
@@ -233,7 +233,7 @@ export class SettingsBuilder {
 			placeholder: '.pdf|.txt|.md'
 		});
 		const addButton = inputContainer.createEl('button', {
-			text: 'Add',
+			text: '添加',
 			cls: 'mod-cta'
 		});
 
@@ -310,8 +310,8 @@ export class SettingsBuilder {
 
 		// Create the preview setting
 		const previewSetting = new Setting(this.containerEl)
-			.setName('Active extensions')
-			.setDesc('File extensions that will be processed')
+			.setName('活动扩展名')
+			.setDesc('将被处理的文件扩展名')
 			.setClass('extensions-preview-setting');
 
 		// Move the preview setting after the custom extensions section
@@ -335,7 +335,7 @@ export class SettingsBuilder {
 			});
 		} else {
 			const emptyBox = previewContainer.createDiv('extensions-box');
-			emptyBox.createDiv('extension-empty-text').setText('No extensions selected');
+			emptyBox.createDiv('extension-empty-text').setText('未选择任何扩展名');
 		}
 
 		// Add styling
@@ -346,7 +346,7 @@ export class SettingsBuilder {
 	}
 
 	getStorageSectionHeaderDesc(): string {
-		return 'Available variables: ${originalName}, ${random}, ${notename}, ${date}, ${time}, ${extension}, ${year} , ${month}, ${day}, ${hour}, ${minute}, ${second}.'
+		return '可用变量：${path}, ${notename}, ${notenameWithoutExt}, ${originalName}, ${random}, ${date}, ${time}, ${extension}, ${year}, ${month}, ${day}, ${hour}, ${minute}, ${second}。';
 	}
 
 	static validateSettings(settings: any): { isValid: boolean; errors: string[] } {
@@ -354,12 +354,12 @@ export class SettingsBuilder {
 
 		// Validate storage path
 		if (!settings.storePath) {
-			errors.push('Storage path is required');
+			errors.push('存储路径为必填项');
 		}
 
 		// Validate that at least one extension source is selected
 		if (settings.presetExtensions.length === 0 && settings.customExtensions.length === 0) {
-			errors.push('At least one file extension must be selected or added');
+			errors.push('至少需要选择或添加一个文件扩展名');
 		}
 
 		return {
@@ -385,11 +385,11 @@ export class SettingsBuilder {
 
 	private isValidExtension(extension: string): boolean {
 		// RegExp to validate file extensions:
-		// ^\.              - Must start with a dot
+		// ^\\.              - Must start with a dot
 		// [a-zA-Z0-9]+    - Must have at least one alphanumeric character
 		// [a-zA-Z0-9-]*   - Can be followed by alphanumeric characters or hyphens
 		// $               - Must end there
-		const extensionRegex = /^\.[a-zA-Z0-9]+[a-zA-Z0-9-]*$/;
+		const extensionRegex = /^\\.[a-zA-Z0-9]+[a-zA-Z0-9-]*$/;
 
 		if (!extension) return false;
 
@@ -397,7 +397,7 @@ export class SettingsBuilder {
 		const lowerExt = extension.toLowerCase();
 		const isValid = extensionRegex.test(lowerExt);
 		if (!isValid) {
-			new Notice('Invalid extension format. Extensions must start with a dot followed by letters/numbers (e.g., .pdf)', 3000);
+			new Notice('扩展名格式无效。扩展名必须以点号开头，后跟字母/数字（例如：.pdf）', 3000);
 		}
 		return isValid;
 	}

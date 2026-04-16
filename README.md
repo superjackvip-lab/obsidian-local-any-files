@@ -53,8 +53,9 @@ It supports a wide range of file types and provides flexible configuration optio
 
 - **Customizable Store Path and File Name**:
   - Dynamic store path with variables support:
-    - `${path}`: Current note's path
-    - `${notename}`: Current note's name
+    - `${path}`: Current note's directory path (without filename)
+    - `${notename}`: Current note's name (with .md)
+    - `${notenameWithoutExt}`: Current note's name (without .md) 🆕
   - Flexible file naming with variables:
     - `${originalName}`: Original file name
     - `${date}`: Current date
@@ -67,6 +68,42 @@ It supports a wide range of file types and provides flexible configuration optio
     - `${hour}`: Current hour
     - `${minute}`: Current minute
     - `${second}`: Current second
+
+## 🌐 Chinese Customized Version
+
+This is a customized version of the original plugin with the following improvements:
+
+### ✨ New Features
+
+- **New variable `${notenameWithoutExt}`**: Returns note name without `.md` extension
+  - Example: Note `my-note.md` → `${notenameWithoutExt}` returns `my-note`
+  - Useful for scenarios requiring clean note names (e.g., folder naming)
+
+### 🔧 Modifications
+
+- **`${path}` variable behavior change**: Now returns only directory path without filename
+  - Before: `${path}` → `folder/subfolder/note.md`
+  - After: `${path}` → `folder/subfolder`
+  - For full path, use `${path}/${notename}`
+
+### 🌐 Menu Localization (Chinese)
+
+- Command Palette: `下载链接中的附件` (Download attachments from links)
+- Command Palette: `下载链接中的附件（使用上次选项）` (Download with previous options)
+- Context Menu: `下载到本地` (Download to local)
+- File Menu: `下载文件（当前笔记）` (Download files - current note)
+
+### 📋 Variable Examples
+
+```yaml
+# Store path configuration example
+attachments/${path}/${notenameWithoutExt}
+
+# Actual result
+Note path: projects/my-project/readme.md
+Config path: attachments/${path}/${notenameWithoutExt}
+Actual path: attachments/projects/my-project/readme/
+```
 
 ## Comparison with `obsidian-local-images`
 

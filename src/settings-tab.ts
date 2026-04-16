@@ -18,18 +18,18 @@ export class LocalAnyFilesSettingTab extends PluginSettingTab {
         const builder = new SettingsBuilder(containerEl, this.plugin);
 
         // Processing
-        new Setting(containerEl).setName('Processing').setHeading();
+        new Setting(containerEl).setName('处理设置').setHeading();
         builder.addScopeDropdown();
         builder.addTasksDropdown();
 
         // File Extensions
-        new Setting(containerEl).setName('File extensions').setHeading();
+        new Setting(containerEl).setName('文件扩展名').setHeading();
         builder.addPresetExtensions();
         builder.addCustomExtensions();
         builder.addFinalExtensionsDisplay();
 
         // Storage
-        new Setting(containerEl).setName('Storage').setHeading().setDesc(builder.getStorageSectionHeaderDesc());
+        new Setting(containerEl).setName('存储设置').setHeading().setDesc(builder.getStorageSectionHeaderDesc());
         builder.addStorePath();
     }
 }

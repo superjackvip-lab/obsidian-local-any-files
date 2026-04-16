@@ -53,8 +53,9 @@
 
 - **可自定义的存储路径和文件名**：
   - 支持变量的动态存储路径：
-    - `${path}`：当前笔记的路径
-    - `${notename}`：当前笔记的名称
+    - `${path}`：当前笔记的目录路径（不含文件名）
+    - `${notename}`：当前笔记的名称（含 .md）
+    - `${notenameWithoutExt}`：当前笔记的名称（不含 .md）🆕
   - 灵活的文件命名支持变量：
     - `${originalName}`：原始文件名
     - `${date}`：当前日期
@@ -67,6 +68,42 @@
     - `${hour}`：当前小时
     - `${minute}`：当前分钟
     - `${second}`：当前秒
+
+## 🌐 中文定制版说明
+
+本版本为原插件的中文定制版，包含以下改进：
+
+### ✨ 新增功能
+
+- **新增变量 `${notenameWithoutExt}`**：返回不含 `.md` 扩展名的笔记名
+  - 例如：笔记 `我的笔记.md` → `${notenameWithoutExt}` 返回 `我的笔记`
+  - 适用于需要纯净笔记名的场景（如文件夹命名）
+
+### 🔧 修改优化
+
+- **`${path}` 变量行为修改**：现在只返回目录路径，不含文件名
+  - 修改前：`${path}` → `folder/subfolder/note.md`
+  - 修改后：`${path}` → `folder/subfolder`
+  - 如需完整路径，可使用 `${path}/${notename}`
+
+### 🌐 菜单汉化
+
+- 命令面板：`下载链接中的附件`
+- 命令面板：`下载链接中的附件（使用上次选项）`
+- 右键菜单：`下载到本地`
+- 文件菜单：`下载文件（当前笔记）`
+
+### 📋 变量示例
+
+```yaml
+# 存储路径配置示例
+附件/${path}/${notenameWithoutExt}
+
+# 实际效果
+笔记路径：projects/my-project/readme.md
+配置路径：附件/${path}/${notenameWithoutExt}
+实际路径：附件/projects/my-project/readme/
+```
 
 ## 与 `obsidian-local-images` 的比较
 
