@@ -2,6 +2,7 @@ export interface PathVariables {
     [key: string]: string;
     path: string;
     notename: string;
+    notenameWithoutExt: string;
     date: string;
     time: string;
     originalName: string;
@@ -17,10 +18,17 @@ export interface PathVariables {
 export function generatePathVariables(documentPath: string): PathVariables {
     const now = new Date();
     const filename = documentPath.split('/').pop() || 'untitled';
+    // Extract directory path by removing the filename
+    const pathParts = documentPath.split('/');
+    pathParts.pop(); // Remove the filename
+    const directoryPath = pathParts.join('/');
+    // Remove .md extension from filename
+    const notenameWithoutExt = filename.replace(/\.md$/i, '');
     
     return {
-        path: documentPath,
+        path: directoryPath,
         notename: filename,
+        notenameWithoutExt: notenameWithoutExt,
         date: now.toISOString().split('T')[0],
         time: now.toISOString().split('T')[1].split('.')[0].replace(/:/g, '-'),
         originalName: filename,

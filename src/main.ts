@@ -16,13 +16,13 @@ export default class LocalAnyFilesPlugin extends Plugin {
         // Add commands
         this.addCommand({
             id: 'local-anything',
-            name: 'Download attachments from links',
+            name: '下载链接中的附件',
             callback: () => this.downloadHandler.handleDownloadWithOptions()
         });
 
         this.addCommand({
             id: 'local-anything-use-previous-options',
-            name: 'Download attachments from links (use previous options)',
+            name: '下载链接中的附件（使用上次选项）',
             callback: () => this.downloadHandler.handleDownload()
         });
 
@@ -66,7 +66,7 @@ export default class LocalAnyFilesPlugin extends Plugin {
                             if (isImage || isPresetExtension) {
                                 menu.addItem((item) => {
                                     item
-                                        .setTitle('Download to local')
+                                        .setTitle('下载到本地')
                                         .setIcon('download')
                                         .onClick(async () => {
                                             if (this.settings) {
@@ -89,7 +89,7 @@ export default class LocalAnyFilesPlugin extends Plugin {
                 if (file instanceof TFile && file.extension === 'md') {
                     menu.addItem((item) => {
                         item
-                            .setTitle('Download files (current note)')
+                            .setTitle('下载文件（当前笔记）')
                             .setIcon('download')
                             .onClick(() => this.downloadHandler.handleDownloadWithOptions('currentFile'));
                     });
